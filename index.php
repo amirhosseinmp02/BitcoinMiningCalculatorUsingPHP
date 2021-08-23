@@ -14,12 +14,13 @@ function tofloat($num) {
         preg_replace("/[^0-9]/", "", substr($num, $sep+1, strlen($num)))
     );
 } 
+
 $coindeskapi = file_get_contents("https://api.coindesk.com/v1/bpi/currentprice/btc.json");//btc to usd online price api//api
-$rasterapi = file_get_contents("https://raters.ir/exchange/api/currency/usd");//usd to rial online price api//api
+$rasterapi = file_get_contents("https://dapi.p3p.repl.co/api/?currency=usd");//usd to rial online price api//api
 $mycoindeskapiJSON = json_decode($coindeskapi,true);//use btc to usd online price api with array//array
 $myrasterapiJSON = json_decode($rasterapi,true);//use usd to rial online price api with array//array
 $BTC_TO_USD_PRICE = intval(tofloat($mycoindeskapiJSON['bpi']['USD']['rate']));//btc online price(type::string)tofloat and after that to integr//value
-$USD_TO_TOMAN_PRICE = (intval((str_replace(",","",$myrasterapiJSON['data']['prices'][0]['live'])))/10);//usd to rial online price //value
+$USD_TO_TOMAN_PRICE = (intval((str_replace(",","",$myrasterapiJSON['Price'])))/10);//usd to rial online price //value
 $BTC_TO_TOMAN = $BTC_TO_USD_PRICE*$USD_TO_TOMAN_PRICE;
 $lastblockapi = file_get_contents("https://chain.api.btc.com/v3/block/latest");
 $mylastblockapijson = json_decode($lastblockapi,true);
@@ -132,15 +133,13 @@ $BTC_NETWORK_DIFFICULTY = $mylastblockapijson['data']['difficulty'];
 			</table>
 		</main>
 		<footer class="footer">
-            <h2>ما را در شبکه های اجتماعی دنبال کنید</h2>
             <div class="social">
-                <a href="#"><i class="fa fa-telegram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://github.com/amirhosseinmp02"><i class="fa fa-github" aria-hidden="true"></i></a>
             </div>
         </footer>
 	</div>
 
-	<script src="Js/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="Js/app.js"></script>
 	<script>
 		$(function () {
